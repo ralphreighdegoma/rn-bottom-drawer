@@ -13,7 +13,9 @@ export default class Animator extends Component{
   constructor(props){
     super(props);
     
-    this.position = new Animated.ValueXY(this.props.currentPosition);
+    this.position = new Animated.ValueXY(this.props.currentPosition, {
+      useNativeDriver: true, // <-- Add this
+    });
 
     this._panResponder = PanResponder.create({
       onStartShouldSetPanResponder: () => true,
@@ -25,6 +27,7 @@ export default class Animator extends Component{
   render() {
     return (
       <Animated.View 
+       
         style={[
           {...this.position.getLayout(), left: 0},
           StyleSheet.flatten([
